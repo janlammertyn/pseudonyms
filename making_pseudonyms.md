@@ -27,9 +27,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3
-    1 Betty Davis 1944-07-26      F 46 43 34
-    2   Peggy Sue 1957-09-20      F 50 18 32
-    3 Frank Zappa 1940-12-21      M 47  2 12
+    1 Betty Davis 1944-07-26      F  2 37 58
+    2   Peggy Sue 1957-09-20      F 37 44  6
+    3 Frank Zappa 1940-12-21      M 21  1 38
 
 We will now use 3 different methods to create pseudonyms for this data:
 
@@ -38,7 +38,8 @@ We will now use 3 different methods to create pseudonyms for this data:
 3.  hashing
 
 Counter and RNG pseudonyms can be made before the actual data
-collection. Hashing pseudonyms can be made when
+collection. Hashing pseudonyms can be made from the moment some data is
+collected about the participants.
 
 # Counter pseudonyms
 
@@ -59,9 +60,9 @@ from the original data set with the newly created “id”-column containing
 the counter pseudonyms.
 
 ``` r
-counter <- dataset[,4:6]
-counter$id <- n3[1:nrow(counter)] 
-dataset$id <- counter$id
+counter <- dataset[,4:6]          # Make a dataframe containing the research data
+counter$id <- n3[1:nrow(counter)] # Add the counter id column
+dataset$id <- counter$id          # Add the counter id column to the keyfile
 ```
 
 Presto! We have now a pseudonymized data set:
@@ -71,9 +72,9 @@ print(counter)
 ```
 
       v1 v2 v3    id
-    1 46 43 34 PP001
-    2 50 18 32 PP002
-    3 47  2 12 PP003
+    1  2 37 58 PP001
+    2 37 44  6 PP002
+    3 21  1 38 PP003
 
 And a keyfile:
 
@@ -82,11 +83,11 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 46 43 34 PP001
-    2   Peggy Sue 1957-09-20      F 50 18 32 PP002
-    3 Frank Zappa 1940-12-21      M 47  2 12 PP003
+    1 Betty Davis 1944-07-26      F  2 37 58 PP001
+    2   Peggy Sue 1957-09-20      F 37 44  6 PP002
+    3 Frank Zappa 1940-12-21      M 21  1 38 PP003
 
-# Randon Number Generator (RNG) pseudonyms
+# Random Number Generator (RNG) pseudonyms
 
 Creating an RNG pseudonym is similar to creating a counter pseudonym,
 except that now the list with pseudonyms is randomized.
@@ -101,9 +102,9 @@ n4 <- sample(n3)                  # Randomize the order of the pseudonyms
 Again, we create a pseudonomyzed data set, as well as a keyfile
 
 ``` r
-rng <- dataset[,4:6]
-rng$id <- n4[1:nrow(rng)] 
-dataset$id <- rng$id
+rng <- dataset[,4:6]      # Make a dataframe containing the research data
+rng$id <- n4[1:nrow(rng)] # Add the rng id column
+dataset$id <- rng$id      # Add the rng id column to the keyfile
 ```
 
 We have now a pseudonymized data set:
@@ -113,9 +114,9 @@ print(rng)
 ```
 
       v1 v2 v3    id
-    1 46 43 34 PP271
-    2 50 18 32 PP397
-    3 47  2 12 PP891
+    1  2 37 58 PP832
+    2 37 44  6 PP453
+    3 21  1 38 PP977
 
 And the keyfile:
 
@@ -124,9 +125,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 46 43 34 PP271
-    2   Peggy Sue 1957-09-20      F 50 18 32 PP397
-    3 Frank Zappa 1940-12-21      M 47  2 12 PP891
+    1 Betty Davis 1944-07-26      F  2 37 58 PP832
+    2   Peggy Sue 1957-09-20      F 37 44  6 PP453
+    3 Frank Zappa 1940-12-21      M 21  1 38 PP977
 
 # Hashed pseudonyms (with secret key)
 
@@ -177,7 +178,7 @@ this combination should be unique. Therefore, we chose to paste together
 the name, date of birth and gender into one long string.
 
 ``` r
-tmp <- paste0(dataset$names, dataset$dob, dataset$gender)   # paste together personal data, create a unique string
+tmp <- paste0(dataset$names, dataset$dob, dataset$gender)   # Paste together personal data, create a unique string
 ```
 
 Once we have done that, we pull these string through the hash-function
@@ -185,7 +186,7 @@ Once we have done that, we pull these string through the hash-function
 key defined earlier.
 
 ``` r
-hashes <- sha2(tmp, key = MySecret)                         # hash it
+hashes <- sha2(tmp, key = MySecret)                         # Hash it
 ```
 
 In this step, we truncate (shorten) the resulting hash code in order to
@@ -215,9 +216,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 46 43 34 19cc9d2c
-    2 50 18 32 17e3b7c9
-    3 47  2 12 e24d4874
+    1  2 37 58 19cc9d2c
+    2 37 44  6 17e3b7c9
+    3 21  1 38 e24d4874
 
 Remember that it is not necessary to add the hash codes to the original
 data set. Instead, we have documented our method (with this code), and
@@ -250,9 +251,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 46 43 34 19cc9d2c
-    2 50 18 32 17e3b7c9
-    3 47  2 12 e24d4874
+    1  2 37 58 19cc9d2c
+    2 37 44  6 17e3b7c9
+    3 21  1 38 e24d4874
 
 And the “keyfile” containing the variables used to create the hash
 codes:
