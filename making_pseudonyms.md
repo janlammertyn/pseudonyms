@@ -27,9 +27,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3
-    1 Betty Davis 1944-07-26      F 19 15 24
-    2   Peggy Sue 1957-09-20      F  7 11  5
-    3 Frank Zappa 1940-12-21      M 32 29 58
+    1 Betty Davis 1944-07-26      F 46 43 34
+    2   Peggy Sue 1957-09-20      F 50 18 32
+    3 Frank Zappa 1940-12-21      M 47  2 12
 
 We will now use 3 different methods to create pseudonyms for this data:
 
@@ -71,9 +71,9 @@ print(counter)
 ```
 
       v1 v2 v3    id
-    1 19 15 24 PP001
-    2  7 11  5 PP002
-    3 32 29 58 PP003
+    1 46 43 34 PP001
+    2 50 18 32 PP002
+    3 47  2 12 PP003
 
 And a keyfile:
 
@@ -82,9 +82,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 19 15 24 PP001
-    2   Peggy Sue 1957-09-20      F  7 11  5 PP002
-    3 Frank Zappa 1940-12-21      M 32 29 58 PP003
+    1 Betty Davis 1944-07-26      F 46 43 34 PP001
+    2   Peggy Sue 1957-09-20      F 50 18 32 PP002
+    3 Frank Zappa 1940-12-21      M 47  2 12 PP003
 
 # Randon Number Generator (RNG) pseudonyms
 
@@ -113,9 +113,9 @@ print(rng)
 ```
 
       v1 v2 v3    id
-    1 19 15 24 PP720
-    2  7 11  5 PP076
-    3 32 29 58 PP282
+    1 46 43 34 PP271
+    2 50 18 32 PP397
+    3 47  2 12 PP891
 
 And the keyfile:
 
@@ -124,9 +124,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 19 15 24 PP720
-    2   Peggy Sue 1957-09-20      F  7 11  5 PP076
-    3 Frank Zappa 1940-12-21      M 32 29 58 PP282
+    1 Betty Davis 1944-07-26      F 46 43 34 PP271
+    2   Peggy Sue 1957-09-20      F 50 18 32 PP397
+    3 Frank Zappa 1940-12-21      M 47  2 12 PP891
 
 # Hashed pseudonyms (with secret key)
 
@@ -215,9 +215,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 19 15 24 19cc9d2c
-    2  7 11  5 17e3b7c9
-    3 32 29 58 e24d4874
+    1 46 43 34 19cc9d2c
+    2 50 18 32 17e3b7c9
+    3 47  2 12 e24d4874
 
 Remember that it is not necessary to add the hash codes to the original
 data set. Instead, we have documented our method (with this code), and
@@ -246,25 +246,25 @@ The pseudonymized data set containing the research data and the hash
 codes:
 
 ``` r
-print(hashed, comment=NA)
+print(hashed)
 ```
 
-    ##   v1 v2 v3       id
-    ## 1 19 15 24 19cc9d2c
-    ## 2  7 11  5 17e3b7c9
-    ## 3 32 29 58 e24d4874
+      v1 v2 v3       id
+    1 46 43 34 19cc9d2c
+    2 50 18 32 17e3b7c9
+    3 47  2 12 e24d4874
 
 And the “keyfile” containing the variables used to create the hash
 codes:
 
 ``` r
-print(keyfile, comment=NA)
+print(keyfile)
 ```
 
-    ##         names        dob gender
-    ## 1 Betty Davis 1944-07-26      F
-    ## 2   Peggy Sue 1957-09-20      F
-    ## 3 Frank Zappa 1940-12-21      M
+            names        dob gender
+    1 Betty Davis 1944-07-26      F
+    2   Peggy Sue 1957-09-20      F
+    3 Frank Zappa 1940-12-21      M
 
 As the keyfile contains personal information, it should be kept in a
 safe place.
