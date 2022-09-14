@@ -27,9 +27,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3
-    1 Betty Davis 1944-07-26      F 13 11 68
-    2   Peggy Sue 1957-09-20      F 46  5 33
-    3 Frank Zappa 1940-12-21      M 24 44 66
+    1 Betty Davis 1944-07-26      F 26 21  8
+    2   Peggy Sue 1957-09-20      F 40 10 68
+    3 Frank Zappa 1940-12-21      M 30 20 33
 
 We will now use 3 different methods to create pseudonyms for this data:
 
@@ -72,9 +72,9 @@ print(counter)
 ```
 
       v1 v2 v3    id
-    1 13 11 68 PP001
-    2 46  5 33 PP002
-    3 24 44 66 PP003
+    1 26 21  8 PP001
+    2 40 10 68 PP002
+    3 30 20 33 PP003
 
 And a keyfile:
 
@@ -83,9 +83,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 13 11 68 PP001
-    2   Peggy Sue 1957-09-20      F 46  5 33 PP002
-    3 Frank Zappa 1940-12-21      M 24 44 66 PP003
+    1 Betty Davis 1944-07-26      F 26 21  8 PP001
+    2   Peggy Sue 1957-09-20      F 40 10 68 PP002
+    3 Frank Zappa 1940-12-21      M 30 20 33 PP003
 
 # Random Number Generator (RNG) pseudonyms
 
@@ -115,9 +115,9 @@ print(rng)
 ```
 
       v1 v2 v3    id
-    1 13 11 68 PP880
-    2 46  5 33 PP209
-    3 24 44 66 PP388
+    1 26 21  8 PP135
+    2 40 10 68 PP730
+    3 30 20 33 PP817
 
 And the keyfile:
 
@@ -126,9 +126,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 13 11 68 PP880
-    2   Peggy Sue 1957-09-20      F 46  5 33 PP209
-    3 Frank Zappa 1940-12-21      M 24 44 66 PP388
+    1 Betty Davis 1944-07-26      F 26 21  8 PP135
+    2   Peggy Sue 1957-09-20      F 40 10 68 PP730
+    3 Frank Zappa 1940-12-21      M 30 20 33 PP817
 
 # Hashed pseudonyms (with secret key)
 
@@ -166,14 +166,14 @@ library(openssl)
 We start by choosing a key, which will be used as a kind of password
 while hashing. The key should be kept secret. It is therefore important
 to remove the key from your code from the moment that the pseudonyms are
-created. If you want to keep the key safe and failing memory proof, put
-it in a password manager for later use.
+created. If you want to keep the key safe, put it in a password manager
+for later use.
 
 ``` r
 MySecret = "this is the secret Key which you should REMOVE from you code"
 ```
 
-The next step is choosing the personal data item you want to use to
+The next step is choosing the personal data items you want to use to
 derive the hash codes from. Of course, for each person in the data set,
 this combination should be unique. Therefore, we chose to paste together
 the name, date of birth and gender into one long string.
@@ -182,51 +182,52 @@ the name, date of birth and gender into one long string.
 tmp <- paste0(dataset$names, dataset$dob, dataset$gender)   # Paste together personal data, create a unique string
 ```
 
-Once we have done that, we pull these string through the hash-function
-(`sha2` from the `openssl`-library in this case) also using the secret
-key defined earlier.
+Once we have done that, we pull these strings through the hash-function
+(`sha2` from the `openssl`-library in this case) also applying the
+secret key defined earlier.
 
 ``` r
-hashes <- sha2(tmp, key = MySecret)                         # Hash it
+hashes <- sha2(tmp, key = MySecret)   # Hash it
 ```
 
-In this step, we truncate (shorten) the resulting hash code in order to
-make them more manageable. This of course is an optional step. It is no
-problem at all to use the long hash codes. Even more, if you have **very
-big data sets** (say thousands of entries), **you should not truncate
-the hash codes** to avoid the risk of identical hash codes
-(i.e. collisions).
+In the next step, we shorten the resulting hash codes in order to make
+them more manageable. This of course is an optional step. It is no
+problem at all to use the long hash codes. Even more so, if you have
+**very big data sets** (say thousands of entries), **you should not
+truncate the hash codes** to avoid the risk of identical hash codes
+coming out of the process (also called
+[collisions](https://en.wikipedia.org/wiki/Hash_collision)).
 
 ``` r
-hashes8 <- substr(hashes, 1, 8)      # Optionally truncate long hashes to something more workable. 
-                                     # NOT for big data sets! 
+hashes_short <- substr(hashes, 1, 8)  # Optionally truncate long hashes to something more workable. 
+                                      # NOT for big data sets! 
 ```
 
-Once the hashes are ready, we can create the pseudonymized data set
+Once the hashes are ready, we can create the pseudonymous data set
 containing the research data and the hash id’s.
 
 ``` r
 hashed <- dataset[,4:6]
-hashed$id <- hashes8
+hashed$id <- hashes_short
 ```
 
-This is the resulting dataset:
+This is the resulting data set:
 
 ``` r
 print(hashed)
 ```
 
       v1 v2 v3       id
-    1 13 11 68 19cc9d2c
-    2 46  5 33 17e3b7c9
-    3 24 44 66 e24d4874
+    1 26 21  8 19cc9d2c
+    2 40 10 68 17e3b7c9
+    3 30 20 33 e24d4874
 
 Remember that it is not necessary to add the hash codes to the original
 data set. Instead, we have documented our method (with this code), and
-we can reveal the link between the data and the identities of the
-participants whenever it is necessary. In other words, it is no longer
-necessary to keep the research data available together with the personal
-data used to create the hashes.
+we can recreate the hash codes which form the link between the data and
+the identities of the participants whenever it is necessary. In other
+words, it is no longer necessary to keep the research data available
+together with the personal data used to create the hashes.
 
 Therefore, we only keep the data necessary to re-create the hash codes
 when necessary:
@@ -252,9 +253,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 13 11 68 19cc9d2c
-    2 46  5 33 17e3b7c9
-    3 24 44 66 e24d4874
+    1 26 21  8 19cc9d2c
+    2 40 10 68 17e3b7c9
+    3 30 20 33 e24d4874
 
 And the “keyfile” containing the variables used to create the hash
 codes:
