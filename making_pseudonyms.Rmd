@@ -35,7 +35,7 @@ We will now use 3 different methods to create pseudonyms for this data:
 2.  random number generators
 3.  hashing
 
-Counter and RNG pseudonyms can be made before the actual data collection. Hashing pseudonyms can be made from the moment some data is collected about the participants.
+Counter and RNG pseudonyms can be made before the actual data collection. Hashing pseudonyms can be made from the moment some data about the participants is available.
 
 # Counter pseudonyms
 
