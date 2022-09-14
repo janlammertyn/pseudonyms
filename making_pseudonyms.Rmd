@@ -5,7 +5,10 @@ output:
   html_notebook: default
 ---
 
-
+```{r, echo=FALSE}
+# the seed is set to avoid unnecessary git commits
+set.seed(42)
+```
 
 In this document we will show how to make pseudonyms in R. The methods presented here are discussed in the ENISA report "[Pseudonymisation techniques and best practices](https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices)".
 

@@ -27,9 +27,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3
-    1 Betty Davis 1944-07-26      F 26 21  8
-    2   Peggy Sue 1957-09-20      F 40 10 68
-    3 Frank Zappa 1940-12-21      M 30 20 33
+    1 Betty Davis 1944-07-26      F 49 25 18
+    2   Peggy Sue 1957-09-20      F 37 10 49
+    3 Frank Zappa 1940-12-21      M  1 36 47
 
 We will now use 3 different methods to create pseudonyms for this data:
 
@@ -72,9 +72,9 @@ print(counter)
 ```
 
       v1 v2 v3    id
-    1 26 21  8 PP001
-    2 40 10 68 PP002
-    3 30 20 33 PP003
+    1 49 25 18 PP001
+    2 37 10 49 PP002
+    3  1 36 47 PP003
 
 And a keyfile:
 
@@ -83,9 +83,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 26 21  8 PP001
-    2   Peggy Sue 1957-09-20      F 40 10 68 PP002
-    3 Frank Zappa 1940-12-21      M 30 20 33 PP003
+    1 Betty Davis 1944-07-26      F 49 25 18 PP001
+    2   Peggy Sue 1957-09-20      F 37 10 49 PP002
+    3 Frank Zappa 1940-12-21      M  1 36 47 PP003
 
 # Random Number Generator (RNG) pseudonyms
 
@@ -115,9 +115,9 @@ print(rng)
 ```
 
       v1 v2 v3    id
-    1 26 21  8 PP135
-    2 40 10 68 PP730
-    3 30 20 33 PP817
+    1 49 25 18 PP024
+    2 37 10 49 PP839
+    3  1 36 47 PP356
 
 And the keyfile:
 
@@ -126,9 +126,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 26 21  8 PP135
-    2   Peggy Sue 1957-09-20      F 40 10 68 PP730
-    3 Frank Zappa 1940-12-21      M 30 20 33 PP817
+    1 Betty Davis 1944-07-26      F 49 25 18 PP024
+    2   Peggy Sue 1957-09-20      F 37 10 49 PP839
+    3 Frank Zappa 1940-12-21      M  1 36 47 PP356
 
 # Hashed pseudonyms (with secret key)
 
@@ -218,9 +218,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 26 21  8 19cc9d2c
-    2 40 10 68 17e3b7c9
-    3 30 20 33 e24d4874
+    1 49 25 18 19cc9d2c
+    2 37 10 49 17e3b7c9
+    3  1 36 47 e24d4874
 
 Remember that it is not necessary to add the hash codes to the original
 data set. Instead, we have documented our method (with this code), and
@@ -253,9 +253,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 26 21  8 19cc9d2c
-    2 40 10 68 17e3b7c9
-    3 30 20 33 e24d4874
+    1 49 25 18 19cc9d2c
+    2 37 10 49 17e3b7c9
+    3  1 36 47 e24d4874
 
 And the “keyfile” containing the variables used to create the hash
 codes:
