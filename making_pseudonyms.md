@@ -27,9 +27,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3
-    1 Betty Davis 1944-07-26      F 15 24 58
-    2   Peggy Sue 1957-09-20      F 12 46 67
-    3 Frank Zappa 1940-12-21      M 50 39 51
+    1 Betty Davis 1944-07-26      F 13 11 68
+    2   Peggy Sue 1957-09-20      F 46  5 33
+    3 Frank Zappa 1940-12-21      M 24 44 66
 
 We will now use 3 different methods to create pseudonyms for this data:
 
@@ -72,9 +72,9 @@ print(counter)
 ```
 
       v1 v2 v3    id
-    1 15 24 58 PP001
-    2 12 46 67 PP002
-    3 50 39 51 PP003
+    1 13 11 68 PP001
+    2 46  5 33 PP002
+    3 24 44 66 PP003
 
 And a keyfile:
 
@@ -83,9 +83,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 15 24 58 PP001
-    2   Peggy Sue 1957-09-20      F 12 46 67 PP002
-    3 Frank Zappa 1940-12-21      M 50 39 51 PP003
+    1 Betty Davis 1944-07-26      F 13 11 68 PP001
+    2   Peggy Sue 1957-09-20      F 46  5 33 PP002
+    3 Frank Zappa 1940-12-21      M 24 44 66 PP003
 
 # Random Number Generator (RNG) pseudonyms
 
@@ -100,7 +100,7 @@ n3 <- paste("PP", n2, sep = "")   # Add prefix
 n4 <- sample(n3)                  # Randomize the order of the pseudonyms
 ```
 
-Again, we create a pseudonomyzed data set, as well as a keyfile
+Again, we create a pseudonymized data set, as well as a keyfile
 
 ``` r
 rng <- dataset[,4:6]      # Make a dataframe containing the research data
@@ -115,9 +115,9 @@ print(rng)
 ```
 
       v1 v2 v3    id
-    1 15 24 58 PP048
-    2 12 46 67 PP670
-    3 50 39 51 PP777
+    1 13 11 68 PP880
+    2 46  5 33 PP209
+    3 24 44 66 PP388
 
 And the keyfile:
 
@@ -126,9 +126,9 @@ print(dataset)
 ```
 
             names        dob gender v1 v2 v3    id
-    1 Betty Davis 1944-07-26      F 15 24 58 PP048
-    2   Peggy Sue 1957-09-20      F 12 46 67 PP670
-    3 Frank Zappa 1940-12-21      M 50 39 51 PP777
+    1 Betty Davis 1944-07-26      F 13 11 68 PP880
+    2   Peggy Sue 1957-09-20      F 46  5 33 PP209
+    3 Frank Zappa 1940-12-21      M 24 44 66 PP388
 
 # Hashed pseudonyms (with secret key)
 
@@ -217,9 +217,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 15 24 58 19cc9d2c
-    2 12 46 67 17e3b7c9
-    3 50 39 51 e24d4874
+    1 13 11 68 19cc9d2c
+    2 46  5 33 17e3b7c9
+    3 24 44 66 e24d4874
 
 Remember that it is not necessary to add the hash codes to the original
 data set. Instead, we have documented our method (with this code), and
@@ -252,9 +252,9 @@ print(hashed)
 ```
 
       v1 v2 v3       id
-    1 15 24 58 19cc9d2c
-    2 12 46 67 17e3b7c9
-    3 50 39 51 e24d4874
+    1 13 11 68 19cc9d2c
+    2 46  5 33 17e3b7c9
+    3 24 44 66 e24d4874
 
 And the “keyfile” containing the variables used to create the hash
 codes:

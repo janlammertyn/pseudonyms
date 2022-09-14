@@ -79,7 +79,7 @@ n3 <- paste("PP", n2, sep = "")   # Add prefix
 n4 <- sample(n3)                  # Randomize the order of the pseudonyms
 ```
 
-Again, we create a pseudonomyzed data set, as well as a keyfile
+Again, we create a pseudonymized data set, as well as a keyfile
 
 ```{r}
 rng <- dataset[,4:6]      # Make a dataframe containing the research data
