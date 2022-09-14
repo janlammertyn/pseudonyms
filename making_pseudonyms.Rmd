@@ -70,7 +70,7 @@ print(dataset)
 
 # Random Number Generator (RNG) pseudonyms
 
-Creating an RNG pseudonym is similar to creating a counter pseudonym, except that now the list with pseudonyms is randomized.
+Creating an RNG pseudonym is similar to creating a counter pseudonym, except that now the list with pseudonyms is randomized before they are assigned to the participants.
 
 ```{r}
 n1 <- 1:999                       # Make a series of integers
