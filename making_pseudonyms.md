@@ -182,6 +182,14 @@ the name, date of birth and gender into one long string.
 tmp <- paste0(dataset$names, dataset$dob, dataset$gender)   # Paste together personal data, create a unique string
 ```
 
+This is the result:
+
+``` r
+print(tmp)
+```
+
+    [1] "Betty Davis1944-07-26F" "Peggy Sue1957-09-20F"   "Frank Zappa1940-12-21M"
+
 Once we have done that, we pull these strings through the hash-function
 (`sha2` from the `openssl`-library in this case) also applying the
 secret key defined earlier.
@@ -189,6 +197,16 @@ secret key defined earlier.
 ``` r
 hashes <- sha2(tmp, key = MySecret)   # Hash it
 ```
+
+The hashes look like this:
+
+``` r
+print(hashes)
+```
+
+    [1] "19cc9d2c6410785f1cae191d3b3a94c7642e923837968ca9c217afe0d58b4b43"
+    [2] "17e3b7c96b5bbf284ce89b554e41d2267aeab2aa5d4a42fd7c24cde0bbc76273"
+    [3] "e24d4874b62a54b77183bcba97d4d155d744ec863613ff43a74d923fc13d30e2"
 
 In the next step, we shorten the resulting hash codes in order to make
 them more manageable. This of course is an optional step. It is no
@@ -199,7 +217,7 @@ coming out of the process (also called
 [collisions](https://en.wikipedia.org/wiki/Hash_collision)).
 
 ``` r
-hashes_short <- substr(hashes, 1, 8)  # Optionally truncate long hashes to something more workable. 
+hashes_short <- substr(hashes, 1, 8)  # Truncate long hashes to something more workable. 
                                       # NOT for big data sets! 
 ```
 
