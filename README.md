@@ -1,6 +1,6 @@
 [![CC BY 4.0][cc-by-shield]][cc-by]
 
-# Making pseudonyms in R
+# Making pseudonyms with R
 Create pseudonyms with R using counters, RNGs and hashing:
   
   - [tutorial page](https://github.com/janlammertyn/pseudonyms/blob/main/making_pseudonyms.md)
